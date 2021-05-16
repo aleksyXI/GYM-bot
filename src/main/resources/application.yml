@@ -1,0 +1,19 @@
+bot:
+  name: GYM
+  token: 1837289890:AAFUDMG45GXGN2u5MqYkb1kpKeHqMEqXTrM
+
+spring:
+  datasource:
+    url: jdbc:h2:file:~/spring-boot-h2-db
+    username: aleksy
+    password: aleksy
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
+      path: /h2
