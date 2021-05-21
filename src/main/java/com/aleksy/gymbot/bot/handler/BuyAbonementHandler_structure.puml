@@ -1,0 +1,241 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": ""
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false // root node is included
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "com.aleksy.gymbot.bot.handler.BuyAbonementHandler"
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1415083977 { 
+   	label=aleksy
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1672351683 { 
+   	label=gymbot
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   AddingBirthHandler453642827[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)AddingBirthHandler</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   userRepository: JpaUserRepository [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- accept(user: User): List&lt;PartialBotApiMethod&lt;? extends Serializable&gt;&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- changeDate(user: User): List&lt;PartialBotApiMethod&lt;? extends Serializable&gt;&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- checkDate(user: User, message: String): List&lt;PartialBotApiMethod&lt;? extends Serializable&gt;&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ handle(user: User, message: String): List&lt;PartialBotApiMethod&lt;? extends Serializable&gt;&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ operatedBotState(): State</TD></TR>
+<TR><TD ALIGN="LEFT" >+ operatedCallBackQuery(): List&lt;String&gt;</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Bot319421969[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Bot</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   botToken: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   botUsername: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   updateReceiver: UpdateReceiver [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ executeWithExceptionCheck(sendMessage: SendMessage)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ onUpdateReceived(update: Update)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+BuyAbonementHandler453642827[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)BuyAbonementHandler</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   abonementRepository: JpaAbonementRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   keyboard: List&lt;KeyboardRow&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   row: KeyboardRow [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   userRepository: JpaUserRepository [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- buy(user: User, type: Integer): List&lt;PartialBotApiMethod&lt;? extends Serializable&gt;&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- checkAbonement(user: User): List&lt;PartialBotApiMethod&lt;? extends Serializable&gt;&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ handle(user: User, message: String): List&lt;PartialBotApiMethod&lt;? extends Serializable&gt;&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ operatedBotState(): State</TD></TR>
+<TR><TD ALIGN="LEFT" >+ operatedCallBackQuery(): List&lt;String&gt;</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+MainMenuHandler453642827[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)MainMenuHandler</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   keyboard: List&lt;KeyboardRow&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   row: KeyboardRow [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   userRepository: JpaUserRepository [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- buyAbon(user: User): List&lt;PartialBotApiMethod&lt;? extends Serializable&gt;&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- calendar(user: User): List&lt;PartialBotApiMethod&lt;? extends Serializable&gt;&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ handle(user: User, message: String): List&lt;PartialBotApiMethod&lt;? extends Serializable&gt;&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- help(user: User): List&lt;PartialBotApiMethod&lt;? extends Serializable&gt;&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- mainMenu(user: User): List&lt;PartialBotApiMethod&lt;? extends Serializable&gt;&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ operatedBotState(): State</TD></TR>
+<TR><TD ALIGN="LEFT" >+ operatedCallBackQuery(): List&lt;String&gt;</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+RegistrationHandler453642827[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)RegistrationHandler</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   userRepository: JpaUserRepository [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- accept(user: User): List&lt;PartialBotApiMethod&lt;? extends Serializable&gt;&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- changeName(user: User): List&lt;PartialBotApiMethod&lt;? extends Serializable&gt;&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- checkName(user: User, message: String): List&lt;PartialBotApiMethod&lt;? extends Serializable&gt;&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ handle(user: User, message: String): List&lt;PartialBotApiMethod&lt;? extends Serializable&gt;&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ operatedBotState(): State</TD></TR>
+<TR><TD ALIGN="LEFT" >+ operatedCallBackQuery(): List&lt;String&gt;</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+StartHandler453642827[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)StartHandler</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   botUsername: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   userRepository: JpaUserRepository [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ handle(user: User, message: String): List&lt;PartialBotApiMethod&lt;? extends Serializable&gt;&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ operatedBotState(): State</TD></TR>
+<TR><TD ALIGN="LEFT" >+ operatedCallBackQuery(): List&lt;String&gt;</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+UpdateReceiver319421969[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)UpdateReceiver</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   handlers: List&lt;Handler&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   userRepository: JpaUserRepository [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- getHandlerByCallBackQuery(query: String): Handler</TD></TR>
+<TR><TD ALIGN="LEFT" >- getHandlerByState(state: State): Handler</TD></TR>
+<TR><TD ALIGN="LEFT" >+ handle(update: Update): List&lt;PartialBotApiMethod&lt;? extends Serializable&gt;&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- isMessageWithText(update: Update): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+} 
+
+'edges    
+Bot319421969 -> UpdateReceiver319421969[label="updateReceiver
+[0..1]"];
+BuyAbonementHandler453642827 -> AddingBirthHandler453642827[arrowhead=none, arrowtail=empty, dir=both];
+BuyAbonementHandler453642827 -> MainMenuHandler453642827[arrowhead=none, arrowtail=empty, dir=both];
+BuyAbonementHandler453642827 -> RegistrationHandler453642827[arrowhead=none, arrowtail=empty, dir=both];
+BuyAbonementHandler453642827 -> StartHandler453642827[arrowhead=none, arrowtail=empty, dir=both];
+UpdateReceiver319421969 -> BuyAbonementHandler453642827[label="handlers
+[0..*]"];
+    
+}
+@enduml

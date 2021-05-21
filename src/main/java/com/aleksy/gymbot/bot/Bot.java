@@ -1,14 +1,17 @@
 package com.aleksy.gymbot.bot;
 
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,64 +19,37 @@ import java.util.List;
 @Component
 // Наследуемся от TelegramLongPollingBot - абстрактного класса Telegram API
 public class Bot extends TelegramLongPollingBot {
-    // Аннотация @Value позволяет задавать значение полю путем считывания из application.yaml
     @Value("${bot.name}")
+    @Getter
     private String botUsername;
 
     @Value("${bot.token}")
+    @Getter
     private String botToken;
 
-    /* Перегружаем метод интерфейса LongPollingBot
-    Теперь при получении сообщения наш бот будет отвечать сообщением Hi!
-     */
+    private final UpdateReceiver updateReceiver;
+
+    public Bot(UpdateReceiver updateReceiver) {
+        this.updateReceiver = updateReceiver;
+    }
+
     @Override
     public void onUpdateReceived(Update update) {
-        if(update.hasMessage()){
-            if(update.getMessage().hasText()){
-                if(update.getMessage().getText().equals("Hello")){
-                    try {
-                        execute(sendInlineKeyBoardMessage(update.getMessage().getChatId()));
-                    } catch (TelegramApiException e) {
-                        e.printStackTrace();
-                    }
+        List<PartialBotApiMethod<? extends Serializable>> messagesToSend = updateReceiver.handle(update);
+
+        if (messagesToSend != null && !messagesToSend.isEmpty()) {
+            messagesToSend.forEach(response -> {
+                if (response instanceof SendMessage) {
+                    executeWithExceptionCheck((SendMessage) response);
                 }
-            }
-        }else if(update.hasCallbackQuery()){
-            try {
-                execute(new SendMessage().setText(
-                        update.getCallbackQuery().getData())
-                        .setChatId(update.getCallbackQuery().getMessage().getChatId()));
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
+            });
         }
     }
 
-    // Геттеры, которые необходимы для наследования от TelegramLongPollingBot
-    public String getBotUsername() {
-        return botUsername;
-    }
-
-    public String getBotToken() {
-        return botToken;
-    }
-    public static SendMessage sendInlineKeyBoardMessage(long chatId) {
-        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-        InlineKeyboardButton inlineKeyboardButton1 = new InlineKeyboardButton();
-        InlineKeyboardButton inlineKeyboardButton2 = new InlineKeyboardButton();
-        inlineKeyboardButton1.setText("Тык");
-        inlineKeyboardButton1.setCallbackData("Button \"Тык\" has been pressed");
-        inlineKeyboardButton2.setText("Тык2");
-        inlineKeyboardButton2.setCallbackData("Button \"Тык2\" has been pressed");
-        List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
-        List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList<>();
-        keyboardButtonsRow1.add(inlineKeyboardButton1);
-        keyboardButtonsRow1.add(new InlineKeyboardButton().setText("Fi4a").setCallbackData("CallFi4a"));
-        keyboardButtonsRow2.add(inlineKeyboardButton2);
-        List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
-        rowList.add(keyboardButtonsRow1);
-        rowList.add(keyboardButtonsRow2);
-        inlineKeyboardMarkup.setKeyboard(rowList);
-        return new SendMessage().setChatId(chatId).setText("Пример").setReplyMarkup(inlineKeyboardMarkup);
+    public void executeWithExceptionCheck(SendMessage sendMessage) {
+        try {
+            execute(sendMessage);
+        } catch (TelegramApiException e) {
+        }
     }
 }

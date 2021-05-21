@@ -1,0 +1,235 @@
+@startuml
+
+/' diagram meta data start
+config=CallConfiguration;
+{
+  "rootMethod": "com.aleksy.gymbot.bot.handler.BuyAbonementHandler#handle(User,String)",
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": ""
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false // root node is included
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showMethodParametersTypes": false,
+    "showMethodParametersNames": false,
+    "showMethodReturnType": false,
+    "showPackageLevels": 2,
+    "showCallOrder": false,
+    "edgeMode": "MethodsOnly", // TypesOnly, MethodsOnly, TypesAndMethods, MethodsAndDirectTypeUsage
+    "showDetailedClassStructure": false
+  },
+  "rootClass": "com.aleksy.gymbot.bot.handler.BuyAbonementHandler"
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="LR"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1415083977 { 
+   	label=aleksy
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1672351683 { 
+   	label=gymbot
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   subgraph cluster_1261053271 { 
+   	label=TelegramUtil
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   TelegramUtil1311575846XXXcreateMessageTemplate1808118735[
+	label="+ createMessageTemplate()"
+	style=filled
+	fillcolor=white
+	tooltip="TelegramUtil
+
+null"
+	fontcolor=darkgreen
+];
+
+TelegramUtil1311575846XXXcreateMessageTemplate2645995[
+	label="+ createMessageTemplate()"
+	style=filled
+	fillcolor=white
+	tooltip="TelegramUtil
+
+null"
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_1286856022 { 
+   	label=BuyAbonementHandler
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   BuyAbonementHandler453642827XXXhandle471814256[
+	label="+ handle()"
+	style=filled
+	fillcolor=white
+	tooltip="BuyAbonementHandler
+
+null"
+	penwidth=4
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_1369449238 { 
+   	label=ReplyKeyboardMarkupBuilder
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   ReplyKeyboardMarkupBuilder1679696134XXXbutton1808118735[
+	label="+ button()"
+	style=filled
+	fillcolor=white
+	tooltip="ReplyKeyboardMarkupBuilder
+
+null"
+	fontcolor=darkgreen
+];
+
+ReplyKeyboardMarkupBuilder1679696134XXXcreate0[
+	label="+ create()"
+	style=filled
+	fillcolor=white
+	tooltip="ReplyKeyboardMarkupBuilder
+
+null"
+	fontcolor=darkgreen
+];
+
+ReplyKeyboardMarkupBuilder1679696134XXXendRow0[
+	label="+ endRow()"
+	style=filled
+	fillcolor=white
+	tooltip="ReplyKeyboardMarkupBuilder
+
+null"
+	fontcolor=darkgreen
+];
+
+ReplyKeyboardMarkupBuilder1679696134XXXrow0[
+	label="+ row()"
+	style=filled
+	fillcolor=white
+	tooltip="ReplyKeyboardMarkupBuilder
+
+null"
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_1656004312 { 
+   	label=Bot
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   Bot319421969XXXonUpdateReceived1754979095[
+	label="+ onUpdateReceived()"
+	style=filled
+	fillcolor=white
+	tooltip="Bot
+
+null"
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_558656553 { 
+   	label=UpdateReceiver
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   UpdateReceiver319421969XXXhandle1754979095[
+	label="+ handle()"
+	style=filled
+	fillcolor=white
+	tooltip="UpdateReceiver
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+} 
+
+'edges    
+Bot319421969XXXonUpdateReceived1754979095 -> UpdateReceiver319421969XXXhandle1754979095;
+BuyAbonementHandler453642827XXXhandle471814256 -> ReplyKeyboardMarkupBuilder1679696134XXXbutton1808118735;
+BuyAbonementHandler453642827XXXhandle471814256 -> ReplyKeyboardMarkupBuilder1679696134XXXcreate0;
+BuyAbonementHandler453642827XXXhandle471814256 -> ReplyKeyboardMarkupBuilder1679696134XXXendRow0;
+BuyAbonementHandler453642827XXXhandle471814256 -> ReplyKeyboardMarkupBuilder1679696134XXXrow0;
+BuyAbonementHandler453642827XXXhandle471814256 -> TelegramUtil1311575846XXXcreateMessageTemplate2645995;
+TelegramUtil1311575846XXXcreateMessageTemplate2645995 -> TelegramUtil1311575846XXXcreateMessageTemplate1808118735;
+UpdateReceiver319421969XXXhandle1754979095 -> BuyAbonementHandler453642827XXXhandle471814256;
+    
+}
+@enduml
